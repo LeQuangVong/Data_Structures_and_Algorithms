@@ -1,0 +1,1 @@
+Linked List là một cấu trúc dữ liệu dạng danh sách liên kết, trong đó mỗi phần tử (node) chứa hai phần: dữ liệu và con trỏ (pointer) tới phần tử tiếp theo. Khác với mảng, các phần tử trong Linked List không nằm liên tiếp trong bộ nhớ. Điều này giúp cho việc chèn, xoá phần tử trở nên dễ dàng hơn mà không cần phải di chuyển các phần tử khác.
