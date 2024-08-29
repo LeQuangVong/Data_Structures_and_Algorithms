@@ -13,7 +13,7 @@ typedef struct Stack
 {
     int data[MAX_SIZE];
     int top;
-};
+} Stack;
 
 //khoi tao Stack
 void initStack(Stack *s)

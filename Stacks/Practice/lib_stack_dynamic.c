@@ -7,7 +7,7 @@ typedef struct Stack
     int *data; // con trỏ tới mảng động chứa các stack
     int top; //chỉ số của phần tử trên cùng 
     int capacity; //Dung lượng hiện tại của stack (số phần tử tối đa có thể chứa)
-};
+} Stack;
 //Khởi tạo Stack
 void initStack(Stack *s, int initialCapacity)
 {
