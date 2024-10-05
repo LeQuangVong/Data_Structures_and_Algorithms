@@ -27,9 +27,95 @@ int main()
     insertFirst(30);
     insertLast(40);
     printList();
+    if (deleteFirst())      
+    {
+        printf("Da xoa node dau tien!\n");
+    }
+    else
+    {
+        printf("danh sach trong!\n");
+    }
+    printList();
+
+    if (deleteNode(10))      
+    {
+        printf("Da xoa node 10!\n");
+    }
+    else
+    {
+        printf("danh sach trong!\n");
+    }
+    printList();
+
+    if (deleteLast())      
+    {
+        printf("Da xoa node cuoi cung!\n");
+    }
+    else
+    {
+        printf("danh sach trong!\n");
+    }
+    printList();
+
     freeList();
     printList();
     return 0;
+}
+bool deleteLast()
+{
+    Node* current = head;
+    Node* prev = NULL;
+
+    if (head == NULL)
+    {
+        return false;
+    }
+    
+    while (current->next != NULL)
+    {
+        prev = current;
+        current = current->next;
+    }
+    
+    prev->next = NULL;
+    free(current);
+    return true;
+}
+
+bool deleteNode(int data)
+{
+    Node* current = head;
+    Node* prev = NULL;
+    Node* next = NULL;
+
+    if (head == NULL)
+    {
+        return false;
+    }
+    
+    while (current->data != data)
+    {
+        prev = current;
+        current = current->next;
+        next = current->next;
+    }
+    prev->next = current->next;
+    next->prev = prev;
+    free(current);
+    return true;
+}
+
+bool deleteFirst()
+{
+    Node* current = head;
+    if (head == NULL)
+    {
+        return false;
+    }
+    
+    head = head->next;
+    free(current);
+    return true;
 }
 void freeList()
 {

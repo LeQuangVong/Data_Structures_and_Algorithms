@@ -21,6 +21,7 @@ int deleteLast();
 int deleteNode(int data);
 int find(int data);
 void freeList();
+void arrangeList();
 
 int main()
 {
@@ -29,8 +30,10 @@ int main()
     insertFirst(30);
     insertFirst(70);
     insertFirst(5);
-
     printf("list: ");
+    printList();
+    
+    arrangeList();
     printList();
 
     printf("- Xoa node dau tien\n");
@@ -93,7 +96,58 @@ int main()
     insertFirst(10);
     printf("list: \n");
     printList();
+    freeList();
+    printList();
     return 0;
+}
+
+void arrangeList()
+{
+    Node* lastNode = NULL;
+    int flag;
+    do
+    {
+        Node* current = head;
+        Node* prev = NULL;
+        flag = 0;
+
+        /*
+            vòng lặp while sắp xếp danh sách 1 lần
+            prev->current->next
+        */
+        while (current->next != lastNode)
+        {
+            Node* next = current->next;//con trỏ trỏ đến Node tiếp theo Node hiện tại
+            if (current->data > next->data)
+            {
+                //hoán đổi 2 Node
+                //next -> head=current
+                current->next = next->next;
+                next->next = current;
+                //khi hoán đổi ở đầu thì cập nhật lại con trỏ head
+                //prev = NULL, head = current->next
+                if (prev == NULL)
+                {
+                    //head = next->current
+                    head = next;
+                }
+                else// khi ở giữa danh sách
+                    //->prev->next->current
+                {
+                    prev->next = next;
+                    //prev->next
+                }
+                prev = next;//prev=next->current
+                flag = 1;
+            }
+            else//khi da sap xep thi di chuyen den node tiep theo
+            {
+                prev = current;
+                current = current->next;
+            }
+        }
+        lastNode = current;
+    } while (flag == 1);
 }
 
 //Create Node
