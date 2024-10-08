@@ -12,14 +12,20 @@ Node* createNode(int data);
 Node* insertNode(Node* root, int data);
 void printNodeLeftRight(Node* root);
 Node* searchNode(Node* root, int data);
+Node* deleteNode(Node* root, int data);
 
 int main()
 {
     Node* root = NULL;
     root = insertNode(root,10);
-    insertNode(root,20);
+    insertNode(root,5);
     insertNode(root,30);
+    insertNode(root,20);
+    insertNode(root,15);
+    insertNode(root,25);
     insertNode(root,40);
+    insertNode(root,35);
+    insertNode(root,45);
     printNodeLeftRight(root);
     Node* value = searchNode(root,50);
     if (value != NULL)
@@ -28,9 +34,51 @@ int main()
     }
     else
     {
-        printf("\nNode khong ton tai !");
+        printf("\nNode khong ton tai !\n");
     }
+    root = deleteNode(root,30);
+    printNodeLeftRight(root);
     return 0;
+}
+Node* deleteNode(Node* root, int data)
+{
+    if (root == NULL)
+    {
+        return NULL;
+    }
+
+    if (root->data > data)
+    {
+        root->left = deleteNode(root->left,data);
+    }
+    else if (root->data < data)    
+    {
+        root->right = deleteNode(root->right,data);
+    }
+    else
+    {
+        Node* Temp = root;
+        if (root->right == NULL)
+        {
+            root = root->left;
+        }
+        else if (root->left == NULL)
+        {
+            root = root->right;
+        }
+        else
+        {
+            Node* min = root->right;
+            while (min->left != NULL)
+            {
+                min = min->left;
+            }
+            root->data = min->data;
+            root->right = deleteNode(root->right,min->data);
+        }
+        free(Temp);
+    }
+    return root;
 }
 
 Node* searchNode(Node* root, int data)
@@ -52,8 +100,8 @@ void printNodeLeftRight(Node* root)
 {
     if (root != NULL)
     {
-        printf("%d ",root->data);
         printNodeLeftRight(root->left);
+        printf("%d ",root->data);
         printNodeLeftRight(root->right);
     }
 }
